@@ -1,7 +1,7 @@
-/
+/ 
 *******************************************************************************
-* PROJ 2: CalcYouLater
-* Comp 15 October 18th 2022
+* PROJ 3: Zap
+* Comp 15 November 17th 2022
 * README
 * Author: Hazel Scullin - hscull01
 *******************************************************************************
@@ -9,211 +9,211 @@
 
 Program Purpose:
 ---------------
-    This program is the implementation of a Reverse Polish Notation 
-    (RPN) calculator. RPN is also known as post fix notation. This program 
-    allows for the use of basic mathmatical operations and comparisons 
-    and allows execution of the calculator on inputted files. 
+    The purpose of this program is to compress and decompress text files 
+    using the Huffman coding algorithm. In other words, the program
+    reduces the number of bits neded to represent the data in a text file. 
+    The program also has the ability to reverse the compression of data. It 
+    restores a previously zapped file inputFil by decompressing it, and storing
+    the resulting ASCII text.
 
 Compile/run:
 -----------
     Compile using
-        make parser
+        make zap
 
     Run executable with
-        ./parser
-
-    Compiled using
-        make CalcYouLater
-    
-    Run executable with
-        ./CalcYouLater
-    
+        ./zap
 
 Acknowledgments:
 ---------------
-    Harrison Sweet, yet again, for drawing pictures with me. 
+    Harrison Sweet for suggesting I write my decode tree function as a for
+    loop instead of recursively as I was trying to do. 
 
 Files:
 -----
 
-DatumStack.h: This is the interface for the DatumStack class. 
-    It incudes all the functions in the vector library that 
-    would allow a vector to act like a stack. There are capacity 
-    and element access functions like size, isEmpty, and top that 
-    return information about the vector and the Datum elements 
-    in the vector. There are also modifying functions like clear, 
-    pop, and push that edit the contents of the vector. 
-
-DatumStack.cpp: This is the implementation for the DatumStack 
-    class. It incudes all the functions in the vector library 
-    that would allow a vector to act like a stack. There are 
-    capacity and element access functions like size, isEmpty, 
-    and top that return information about the vector and the 
-    Datum elements in the vector. There are also modifying 
-    functions like clear, pop, and push that edit the contents of 
-    the vector. Some functions print error messages.
-
-parser.cpp: The purpose of this file is to to turn whatever 
-    is in the input stream into a string. It is comprised of one 
-    functions which takes a reference to an istream as a parameter 
-    to continue reading input from while it converts it all into 
-    string form. 
-
-unit_tests.h: A testing file for the DatumStack Class. 
+unit_tests.h: A testing file for the HuffmanCoder Class. 
     Tests individual functions for errors and runs valgrind. 
 
 Makefile: File to build the program and link the according files 
 
-RPNCalc.h
-    The purpose of this file is to simulate an RPN calculator by calling 
-    an instance of a DatumStack. We then manipulate this instance of the 
-    DatumStack using basic mathmatical operations and comparisons. This 
-    particular file is the interface for the RPNCalc class. It begins 
-    our command loop and has functions that allow execution on files and 
-    strings in addition to the basic mathmatical operations and comparisons.
+HuffmanCoder.h: This is the interface for the HuffmanCoder class. 
+    The HuffmanCoder class allows for the compression and decompression 
+    of text files. To do so it follows much of the logic of a Huffman 
+    coding algorithm. The class has two main functions in within it. 
+    One for "zapping" the text by compressing it and one for "unzapping" 
+    by decompressing both of which enlist the help of a huffman tree.
 
-RPNCalc.cpp
-    The purpose of this file is to be the implementation of the RPNCalc class. 
-    There are funtions within this file to perform basic mathmatical 
-    operations and comparisons. There are also functions to execute 
-    operations on files as well as strings. It operates as a loop that reads 
-    in commands.
+HuffmanCoder.cpp: This is the implementation for the HuffmanCoder class. 
+    The HuffmanCoder class allows for the compression and decompression 
+    of text files. To do so it follows much of the logic of a Huffman 
+    coding algorithm. The class has two main functions in within it. 
+    One for "zapping" the text by compressing it and one for "unzapping" 
+    by decompressing both of which enlist the help of a huffman tree. 
+    To support these main encoding and decoding functions are helper 
+    functions that cover the individual steps. Theres one for counting 
+    the number of instances of a charcter. Theres a function for creatign 
+    a huffman tree. Theres also a function for following the huffman tree 
+    to decode the binary sequence for unzapping the file.
 
 main.cpp
-    The purpose of this file is to create and run one instance of the 
-    RPNCalc class. 
+    The purpose of this file is to create and run one instance of the
+    HuffmanCoder class.
 
-test_file.cylc:
-    sample list of commands that you could give to the calculator.
-    
-test_file2.cylc:
-    sample list of commands that you could give to the calculator.
+BinaryIO.h
+    a provided file which controlls reading and writing to another file.
 
-my_output.txt
-    the file containing output from my program that I compared to 
-    the ref_output.txt file
+banana_output.txt
+    the output file from my code of the zap being called on banana.txt 
 
-my_stdout.txt
-    the file containing std output from my program that I compared to 
-    the ref_stdout.txt file
+hi_output.txt
+    the output file from my code of the zap being called on hi.txt
 
-ref_output.txt
-    an example file containing the output of ./theCalcYouLater that is correct.
+banana_apple_output.txt
+    the output file from my code of the zap being called on banana_apple.txt
 
-ref_stdout.txt
-    an example file containing the std output of ./theCalcYouLater that
-    is correct.
+sentences_output.txt
+    the output file from my code of the zap being called on sentences.txt
 
-FibTest.cylc 
-    sample list of commands to test and diff test my calculator with. 
+all_conll_english_output.txt
+    the output file from my code of the zap being called on 
+    all_conll_english.txt
 
-FibTestEmpty.cylc 
-    sample list of commands to test and diff test my calculator with. 
+works_of_shakespeare_output.txt
+    the output file from my code of the zap being called on 
+    works_of_shakespeare.txt
 
-FibTestTrue.cylc 
-    sample list of commands to test and diff test my calculator with. 
+ecoli.coli
+    the output file from my code of the zap being called on ecoli.coli
 
-FibTestFalse.cylc
-    sample list of commands to test and diff test my calculator with. 
+new_banana.txt
+    the output file from my code of the unzap command being called on 
+    banana_output.txt used for diff testing
+
+new_ecoli.txt 
+    the output file from my code of the unzap command being called on 
+    ecoli_output.txt used for diff testing
 
 Data Structures:
 --------------- 
-    A vector is not a data structure but I am using vectors to build my 
-    DatumStack so that it can operate like a stack. So while we dont actually 
-    use a std::stack, we do simulate a stack using our vector built 
-    DatumStack. Stacks are data structures in which elements are always 
-    added to the top of the stack. Stacks can be summarized by LIFO, meaning 
-    last in first out and can be considered a more restricted version of a 
-    linked list. In other words, the stack helps with managing LIFO so that 
-    the element that is inserted last will alwyas come out first. They are 
-    powerful because they create an abstraction barrier in which users cannot 
-    edit the bottom of the stack. They can only interact with the top most 
-    element. A possible disadvantage to this data structure is that the stack 
-    memory has limited size and can overflow if too many objects are placed 
-    on it. We used a stack in this program because this calculator runs in 
-    reverse polish notation where the operator follows its operands. We 
-    need a stack to handle this this notation type. For example, when 
-    operands are found they are pushed them in the stack and then when an 
-    operator is found, two items are popped from stack and then the 
-    operation is performed in the correct sequence. Then the result is 
-    pushed onto the stack. 
-    
-    We are familiar with stacks in our memory diagrams. The stack is a 
-    stack! Or I guess I should call it the function call stack. With 
-    the function calls the last function to be called is always going 
-    to be the first one to return and finish. The function stack is to 
-    keep track when each active function should return and complete executing. 
-    Stacks can also be used for analyzing nested structures. We can check 
-    if parenthesis, braces, and brackets are balanced. In this scenario, 
-    the open brace, bracket, etc. starts a new task while the closed 
-    brace, bracket, etc. will end the currently active task.
 
-    A complex algorithm we could consider is the command loop. The 
-    command loop is used for performing calculations as well as data 
-    processing, for it gets all of the inputs and calls all of the 
-    according functions to operate on the input. What I found most complex 
-    about the command loop was being able to try adn ctch the appropriate 
-    errors at the right time. That was very difficult to manage.
-    More complex algorithms are the file and exec functions. They were 
-    difficult because i was combining my knowledge of input streams and 
-    string streams with everythign i needed to integrate file into the rest 
-    of my program. For instance, i needed to remove the brackets off of the 
-    rstring, and then I needed to create string streams, and then i needed 
-    to call a new command loop etc. etc. It sounds easy at this point but 
-    it was very difficult. 
+    The most obvious data structure at work in this program is a 
+    tree. In this program a tree is used to generate character codes
+    for compression and for decoding a binary string for decompression. 
+    I chose this data structure because the assignment asks that we use
+    the huffman coding algorithm to produce compressed and decompressed
+    files. Trees are valuable for character coding becuase ecoding is done 
+    using the same tree. This will remove ambiguity and errors form the 
+    decoding process. Additionally, using a tree and huffman algorithms
+    means that code associated with each character should not be present 
+    in the prefix of any other character's code.
+
+    I used queues when creating the priority queue. There is a priority 
+    queue of HuffmanTreeNode pointers, which is represented under the 
+    hood using a vector, and uses the comparator function defined. I used the
+    priority queue to help construct my huffman trees. The priority queue
+    is basically a queue where the minimum value is at the front of the 
+    queue, that way I could use it to connect nodes with minimum values for 
+    the huffman tree more easily. In other words, the top of the queue is 
+    the priority and can removed easily. 
+
+    I also used a vector, or an array, to store the character frequencies
+    for the given text. 
+    Additionally, I made the array the same size as there are ASCII characters
+    so I could store the number of instances under the spot in the array that
+    corresponded to their ASCII value. This allowed me to access them very 
+    easily. That means you can also use a char in contexts where an 
+    integer was expected and the reverse of that too. I believe an array was
+    the right choice because of constant time access. I knew the array wouldnt
+    need to change size so i thought it would be best for both logic 
+    and time and space complexity. 
+
+    An algorithm I relied on to make this code was the function
+    for decoding the tree. I used a for loop to contstruct it and stored 
+    the root in a variable before the loop begins. I then iterated through the 
+    binary string and traversed the tree accordingly moving left when 
+    I encountered zeros and right when i encountered ones. The for loop
+    helped me keep track of where i was in the binary string while resetting 
+    the node of the tree. 
+    I also used a big recursive function to build my huffman tree. I 
+    kept track of the count that allowed me to access the characters in the 
+    string of the serialized tree. Then depending on the serialized 
+    input i would either add a leaf or an internal node. 
+
 
 Testing:
 -------
-    I used both unit_tests and ./parser (the excecutable) to test 
-    my files. I tested the DatumStack in unit_tests where I made 
-    individual tests for each of the functions I wrote in the 
-    DatumStack class. I luckily didn't run into any errors when 
-    testing this part of my code which was a huge win! (thats never 
-    happened before) But then i ran into plenty of errors when 
-    testing my parser function. I thought I had it all down until 
-    I realzed that I was printing an extra space after the final 
-    end bracket. It was hard to notice this issue and once I did, 
-    this meant rearranging where I was printing the spaces in that 
-    function. I decided to print the space before printing in the 
-    newly read string instead of after. 
+    In unit_test I first tested my count_freqs function and and thought it 
+    was wrong on my first try, but then I remembered that the output wont 
+    be identical to that of the zap program you gave me. 
 
-    I tested most of my individual functions of RPNCalc with unit test. 
-    I uncluded as many edge cases as I could think of for the basic 
-    mathmatical operations and comparisons. I implemented the basic 
-    mathmatical operations and comparisons with ease and didnt run into 
-    many errors. 
-    The other functions prooved to be more complex. I used a number of 
-    testing files of my own creation like FibTest.cylc FibTestEmpty.cylc 
-    FibTestTrue.cylc FibTestFalse.cylc to test my own program. In some 
-    tests I added many print statments that allowed me to debug more 
-    easily. Fib_debug was very helpful for this reason too. In addition 
-    to my testing files, I also ran my executable and compared it with 
-    the correct given program. For example, in the terminal i ran this 
-    for my calculator and THEcalculator
-        5 3 - print 2 10 + print 12 3 / print 4 4 * print 16
-    I learned in this type of in-terminal testing that I was throwing a 
-    lot of the wrong errors and not testing all of the edge cases. For 
-    example i needed to be prepared for division by zero and throw the 
-    according error. I was also finding bugs where I was throwing an 
-    error but it was not the correct one. For example I would write 
-        3
-        exec        // and then i would get 
-        Error: datum_not_rstring
-    vs THE calculator which gave this print statement 
-        3
-        exec
-        Error: cannot execute non rstring
-    I solved this with catching one error and throwing another error. 
-    This prooved to be difficult but worthwhile because once I had done 
-    try catch in the few spots that needed it, the code was back to running. 
-    Later in the terminal I also had an error where it was sayinf
-         : unimplemented
-    after every call of exec. The solution was a rearrangement of when I 
-    read commands in vs when i called the command loop on those commands 
-    because I wasnt doing it in the correct order in my while loop. My 
-    previous out of order version meant that I was running the commadn 
-    loop one too many times and causing the program to get angry at me 
-    because it didnt recognize endl.
-    When making this fix I also solved my issue with the program not being 
-    able to do the command "file" or "exec" on { } an rstring with no 
-    characters. This problem i also tested and debugged with FibTestEmpty.cylc.
+    When writing/testing my deserialize function I ran into an error stating 
+    that the monitored xommand dumped core. To debug I wrote a whole bunch 
+    of print statements tracking the variables in my build function that 
+    supports the deserialize tree function. The issue was that I forgot to 
+    dereference the count variable i had passed into the function, so i was 
+    adding to the location where count was stored rather than the value of 
+    the count variable. 
+    My testing print statements were:
+        cout << "our tree is " << serial_tree << endl;
+        cout << "entered" << endl;
+        cout << "count is " << *count << endl;
+    and i put it at the beginning of my build function.
+
+
+    for testing count_freqs cout
+    << node->get_val() << " " << node->get_freq() << endl;
+    in the function to make sure that all of my newly constructed nodes 
+    contained the right characters and frequencies stored in them
+
+    for testing that my tree was constructed correctly I did a horribly 
+    inefficient printing job using the following statements 
+        cout << "root : ";
+    cout << primary_root->get_freq() << endl;
+    cout << "first node on left : ";
+    cout << primary_root->get_left()->get_freq() << endl;
+    cout << primary_root->get_left()->get_val() << endl;
+    cout << "first node on right : ";
+    cout << primary_root->get_right()->get_freq() << endl;
+    etc etc
+
+    I also had a segmentation fault in my unzap function which I solved
+    using a bunch of print statements like above. It looks as follows
+
+    zapped_file_info = reader.readFile(input_file);
+    cout << "read from file" << endl;
+
+    string serialized_tree = zapped_file_info[0];
+    cout << "serialized tree" << endl;
+    encoded_text = zapped_file_info[1];
+    cout << "encoded text" << endl;
+
+    HuffmanTreeNode *root = deserialize_tree(serialized_tree);
+    cout << "deserialized tree" << endl;
+
+    open_or_die(output_file_stream, output_file);
+    cout << "opened out file" << endl;
+
+    decode_tree(root);
+    cout << "decoded tree" << endl;
+    delete_tree(root);
+    cout << "deldete tree" << endl;
+
+    This allowed me to follow along in each step of my program to see where
+    the program was getting stuck and it turned out that my program was stuck 
+    in my decode tree function so I put even more print statements inside to 
+    see when a nodes value was given vs when the function followed a node to 
+    the left or to the right. The issue had to do with me tryign to make the 
+    funciton a recursive one. I changed it to a for loop and all my seg 
+    faults were gone!
+
+    For the latter stages of my testing I ran my code and then the ./the_zap 
+    with the same input and output files and compared each of the results
+    manually for the encoder portion. I was able to do this just by compring
+    the print statements made by each function. And then I diff tested the 
+    decoder functions comparing my code with the_zap once again. 
+
+Hours:
+-------
+    Phase 1: 6 hours
+    Phase 2: 20 hours
