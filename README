@@ -1,0 +1,189 @@
+/**********************************************************
+* Project 1: Metro Simulator
+* CS 15
+* README
+* Hazel Scullin - hscull01
+*********************************************************/
+
+Compile/run:
+     - Compile using
+            make MetroSim
+     - run executable with
+            ./MetroSim stationsFile passFile [commands]
+
+
+Program Purpose: 
+     The purpose of this program is to simulate the metro. More 
+     specifically, I am replicating the behavior of the Green Line. 
+     This program keeps track of passengers coming on and off the 
+     train as well as their pesonal ID and their station of origin
+     and destination station. The train will move along the green line
+     cyclically, meaning that once the train reaches the end of the 
+     line it will start again at the first station it was given.
+     The train will carry PassengerQueues of Passengers and drop off 
+     and pick up Passengers at their associated stations. This program 
+     will later be able to interface with the user via the command line 
+     as well as through a file. 
+
+Acknowledgements: 
+     Harrison Sweet for drawing pictures with me and reccomending I 
+     test my simulation using a smaller station file. The TA who 
+     never told me their name who did my design-checkoff.
+
+Files: 
+main.cpp:
+     The purpose of this program: main.cpp is a driver function that 
+     takes input files from the command line. The program will check 
+     if the files can be opened and then creates a metro simulation 
+     and calls it using those files.
+
+MetroSim.cpp:
+     MetroSim.cpp is for creating an instance of the MetroSim class 
+     and then manipulating it through the comand source (either a 
+     file or the command line). The class has a basic constructor, 
+     a number of functions for initializing the arrays and variables, 
+     and a command loop that calls the functions for editing the 
+     train and station array. More generally, it makes a train and 
+     allows passengers to get on and off of it. 
+
+MetroSim.h:
+     this is the interface for the MetroSim class and the waitlist 
+     struct used in that class. In MetroSim there are functions 
+     for adding and removing passengers from the stations and the 
+     train. The metroSim class also contains a function called run 
+     which is used for runnign the command loop this program operates 
+     on. More generally, the functions listed here are for 
+     manipulating the passengerQueues in the station and train arrays.
+
+stations.txt:
+     an example file containing a list of stations.
+
+test_commands.txt:
+     sample list of commands that you could give to the simulator
+
+the_metroSim:
+     reference implementation for students to see how 
+
+Passenger.h
+     Interface for the Passenger class. As of right now this 
+     interface defines the Passenger struct and its member 
+     variables, the passenger id, the origin station, and the 
+     destination station as well as a constructor and an initial 
+     print function. 
+
+Passenger.cpp 
+     The purpose of this program is to create an instance of a 
+     Passenger struct. Right now the existing function is to 
+     print information about the passenger struct, the passenger's id, 
+     their station of origin and their destination station. 
+
+PassengerQueue.h
+     This is the interface for the PassengerQueue Class. 
+     Right now the existing functions are to print information 
+     about the passenger struct, the passenger's id, their station 
+     of origin and their destination station. In addition there 
+     are finstions to return the element at the front, to add a 
+     passenger at the end, to remove a passenger at the front, 
+     and to return the size. 
+
+PassengerQueue.cpp 
+     The purpose of this program is to create an instance of a 
+     PassengerQueue Class. Right now the existing functions are to 
+     print information about the passenger struct, the passenger's id, 
+     their station of origin and their destination station. In addition
+     there are finstions to return the element at the front, to add a 
+     passenger at the end, to remove a passenger at the front, and to 
+     return the size. 
+
+small_stations.txt:
+     an example file containing a list of stations.
+
+small_test.txt:
+     sample list of commands that you could give to the simulator.
+
+my_output.txt
+     the file containing output from my program that I compared to 
+     the ref_output.txt file
+
+my_stdout.txt
+     the file containing std output from my program that I compared to 
+     the ref_stdout.txt file
+
+ref_output.txt
+     an example file containing the output of ./the_MetroSim that is correct.
+
+ref_stdout.txt
+     an example file containing the std output of ./the_MetroSim that
+     is correct.
+
+
+Data Structures:
+     As of right now I am using a linked list (std::list) to create my 
+     passenger queue of passenger structs. In other words, the passenger 
+     queue is a linked list where the nodes each contain a passenger. 
+     The linked list allows me to add passengers to the back of the queue 
+     and remove from the front of the queue with ease.  
+
+     Later I made a struct using a string and a passenger queue that 
+     would be used to build the train array and stations array vectors.
+     Which brings me to the next data structre I used which was an 
+     (std::vector). The vector datastruct is essentilly a dynamic array 
+     that can change size without me needing to program an expand 
+     function. These vectors are very efficient at accessing their 
+     elements and inefficient at adding and removing elements in any 
+     position but their end. The good thing for this program is that 
+     we will only add and remove elements from the passenger queues 
+     so we do not have to worrk about the vectors being inefficient 
+     in this reguard. The size of the vecotrs in this program are 
+     actually fixed but we used the vectors because it is easier to 
+     access elements in the structure when we dont have to traverse 
+     the list each time like in a linked list. Instead we can access 
+     the elements of the vector indicies which is more efficient. 
+
+Testing:
+     At this point, my testing history is comprised of one test to 
+     test the creation of a passenger and some tests for the functionality 
+     of the PassengerQueue functions.
+
+     For the first stages of coding I tested my command loop using the print 
+     function I wrote to display the information held in the progrem. 
+
+     One of the more meaningful problems I ran into when coding this program 
+     was the order I performed functions in the mm (move train) section of 
+     the command loop. The issue was that i was incrememnting my conductor 
+     before letting passengers enter or exit the train which really screwed 
+     things up. I also had an issue with my board_train function because I 
+     was adding passengers to the train_array at the spot where the conductor 
+     was instead of where that passenger's destination station was. I figured 
+     these issues out by doing a lot of comparing to the ./the_metroSim we 
+     were given. 
+
+     Another thing that helped me for trsting was making a file with just 
+     four stations in it (it is called small_stations.txt). My classmate 
+     and friend Harrison reccommended this to me and it really helped me 
+     to feel less overwhelmed during this testing and debugging process. 
+
+     I also had an issue with creating a continuous loop for hte train 
+     because I struggled with this in lab. Before I remembered what I learned 
+     about modulo my program was seg faulting. 
+
+     The diff testing was a huge help for me. I first realized that I had not 
+     put brackets after the station name to enclose the passengers at that 
+     station. I also learned that I had initialized the p_count for the 
+     passenger's unique id number to be zero and not one. This meant that 
+     every id was off in the testing which was overwhelming but also an 
+     easy fix. I also used the diff testing to test what happens when you 
+     reach the end of the file and dont have mf command and my program was
+     printing Command? with no new line at the end instead of "Command? 
+     Thanks for playing MetroSim. Have a nice day!"
+
+
+Part that you found most difficult:
+     The part of this assignment that was most difficult for me was 
+     implementing a print function for the PassengerQueue class. In the 
+     std::list there isn't an equivalent to the element at function I 
+     wrote for my LinkedList class last week and so I needed to find 
+     an alternative and used begin() instead. More generally, all things 
+     associated with std::list were confusing because I neevr got an 
+     introduction with how to use them so I wasn't even sure what to 
+     write in the beginning. 
